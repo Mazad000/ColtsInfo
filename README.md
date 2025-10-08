@@ -104,6 +104,7 @@
                 <!-- News section -->
                 <div class="sidebar-box">
                     <h2>News</h2>
+                    Daniel jones? no INDIANA JONES!!!
                     <div class="news-content">
                         <h3>Recent Headlines</h3>
                         <!-- News items go here -->

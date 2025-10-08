@@ -106,17 +106,16 @@
                     Daniel jones? no INDIANA JONES!!!
                     <div class="news-content">
                         <h3>Recent Headlines</h3>
-                        <!-- <ul>
-  <li><a href="https://www.reuters.com/sports/colts-sign-k-michael-badgley-replace-injured-spencer-shrader--flm-2025-10-07/" target="_blank" rel="noopener">Colts sign K Michael Badgley to replace injured Spencer Shrader</a> — Oct 7, 2025</li>
-  <li><a href="https://www.reuters.com/sports/lb-germaine-pratt-signs-with-colts-reunites-with-dc--flm-2025-10-08/" target="_blank" rel="noopener">LB Germaine Pratt signs with Colts; reunites with DC Lou Anarumo</a> — Oct 8, 2025</li>
-  <li><a href="https://www.espn.com/nfl/team/_/name/ind/indianapolis-colts" target="_blank" rel="noopener">ESPN team page roundup: Badgley in, Shrader out; Week 6 notes</a> — updated Oct 7–8, 2025</li>
-  <li><a href="https://www.nfl.com/_amp/nfl-news-roundup-latest-league-updates-from-wednesday-oct-8" target="_blank" rel="noopener">NFL.com news roundup: Colts add LB Germaine Pratt</a> — Oct 8, 2025</li>
-  <li><a href="https://www.wrtv.com/sports/colts/colts-kicker-spencer-shrader-out-for-season-with-knee-injury-espn-reports" target="_blank" rel="noopener">WRTV: K Spencer Shrader out for season; Colts add Badgley</a> — Oct 6, 2025</li>
-  <li><a href="https://www.stampedeblue.com/indianapolis-colts-news/115965/colts-place-veteran-cb-on-practice-squad-ir-and-add-latest-secondary-depth" target="_blank" rel="noopener">Stampede Blue: CB Mike Hilton to practice-squad IR; CB Troy Pride Jr. added</a> — Oct 8, 2025</li>
-  <li><a href="https://1075thefan.com/618904/colts-notebook-good-injury-news-coming/" target="_blank" rel="noopener">1075 The Fan: Colts notebook—LB spot next to Zaire Franklin, injuries</a> — Oct 8, 2025</li>
-  <li><a href="https://www.nfl.com/videos/colts-owner-and-chief-brand-officer-kalen-jackson-joins-gmfb" target="_blank" rel="noopener">NFL.com video: Kalen Jackson on mental health initiatives (GMFB)</a> — Oct 8, 2025</li>
+                        <ul>
+  <li>Colts sign K Michael Badgley to replace injured Spencer Shrader — Oct 7, 2025</li>
+  <li>LB Germaine Pratt signs with Colts, reunites with DC Lou Anarumo — Oct 8, 2025</li>
+  <li>Colts place LB Joe Bachie on injured reserve to make room for Pratt</li>
+  <li>Shrader suffers season-ending knee injury (ACL & MCL) and is placed on injured reserve</li>
+  <li>Pratt had registered 25 tackles in four starts for the Raiders before his release</li>
+  <li>Badgley returns to Colts — this marks his third stint with the team</li>
 </ul>
- -->
+
+                        <!-- <ul> -->
                     </div>
                 </div>
 

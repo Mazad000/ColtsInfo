@@ -94,7 +94,7 @@
                 <div class="content-box">
                     <h2>Welcome to Colts Nation</h2>
                     <h3>Latest Updates</h3>
-                    <!-- Additional content goes here -->
+                    <!--  -->
                 </div>
             </main>
 
@@ -124,7 +124,7 @@
                     <h2>External Links</h2>
                     <div class="links-content">
                         <h3>Quick Links</h3>
-                        <!-- Links go here -->
+                        <!--  -->
                     </div>
                 </div>
             </aside>

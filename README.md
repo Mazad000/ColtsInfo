@@ -38,6 +38,7 @@
             <!-- Left sidebar for schedule -->
             <aside class="left-sidebar">
                 <h2>Schedule</h2>
+                colts
                 <div class="schedule-content">
                     <h3>Upcoming Games</h3>
                     <!-- Schedule items go here -->

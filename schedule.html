@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Schedule — ColtsInfo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="site-title">ColtsInfo — Schedule</h1>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="stadium.html">Stadium</a>
+      <a class="nav-link" href="news.html">News</a>
+      <a class="nav-link" href="lineup.html">Lineup</a>
+      <a class="nav-link nav-active" href="schedule.html">Schedule</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section>
+      <div class="editor-header">
+        <h2>Team Schedule</h2>
+        <div class="editor-actions">
+          <button id="addRowBtn">Add Row</button>
+          <button id="exportBtn">Export</button>
+          <button id="importBtn">Import</button>
+          <input id="importFile" type="file" accept="application/json" style="display:none" />
+          <button id="saveBtn">Save</button>
+          <button id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="content card">
+        <table id="scheduleTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Opponent</th>
+              <th>Location</th>
+              <th>Result/Notes</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p class="muted small">Click inside a cell to edit. Use Save to persist in your browser.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (function(){
+    const STORAGE_KEY = 'coltsinfo_schedule_v1';
+    const defaultSchedule = [
+      { date: '2025-09-01', opponent: 'Opponent A', location: 'Home', notes: '' }
+    ];
+
+    const tableBody = document.querySelector('#scheduleTable tbody');
+    const addRowBtn = document.getElementById('addRowBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const importBtn = document.getElementById('importBtn');
+    const importFile = document.getElementById('importFile');
+
+    function load(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(!raw) return defaultSchedule.slice();
+        return JSON.parse(raw);
+      }catch(e){
+        console.error('Failed to load schedule', e);
+        return defaultSchedule.slice();
+      }
+    }
+
+    function save(data){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function render(){
+      tableBody.innerHTML = '';
+      const data = load();
+      data.forEach((row, idx)=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td contenteditable="true" data-field="date">${escapeHtml(row.date)}</td>
+          <td contenteditable="true" data-field="opponent">${escapeHtml(row.opponent)}</td>
+          <td contenteditable="true" data-field="location">${escapeHtml(row.location)}</td>
+          <td contenteditable="true" data-field="notes">${escapeHtml(row.notes)}</td>
+          <td><button class="deleteBtn" data-idx="${idx}">Delete</button></td>
+        `;
+        tableBody.appendChild(tr);
+      });
+      attachDeleteHandlers();
+    }
+
+    function getTableData(){
+      const rows = Array.from(tableBody.querySelectorAll('tr'));
+      return rows.map(tr => {
+        return {
+          date: (tr.querySelector('[data-field="date"]').innerText || '').trim(),
+          opponent: (tr.querySelector('[data-field="opponent"]').innerText || '').trim(),
+          location: (tr.querySelector('[data-field="location"]').innerText || '').trim(),
+          notes: (tr.querySelector('[data-field="notes"]').innerText || '').trim(),
+        };
+      });
+    }
+
+    function attachDeleteHandlers(){
+      const delBtns = tableBody.querySelectorAll('.deleteBtn');
+      delBtns.forEach(btn => {
+        btn.addEventListener('click', (e)=>{
+          const idx = Number(btn.getAttribute('data-idx'));
+          const data = load();
+          data.splice(idx,1);
+          save(data);
+          render();
+        });
+      });
+    }
+
+    addRowBtn.addEventListener('click', ()=>{
+      const data = load();
+      data.push({ date:'', opponent:'', location:'', notes:'' });
+      save(data);
+      render();
+      // focus last row first cell
+      setTimeout(()=> {
+        const lastRow = tableBody.querySelector('tr:last-child td');
+        if(lastRow) lastRow.focus();
+      }, 50);
+    });
+
+    saveBtn.addEventListener('click', ()=>{
+      const data = getTableData();
+      save(data);
+      alert('Schedule saved locally.');
+      render();
+    });
+
+    resetBtn.addEventListener('click', ()=>{
+      if(!confirm('Reset schedule to default? This will overwrite local changes.')) return;
+      save(defaultSchedule.slice());
+      render();
+    });
+
+    exportBtn.addEventListener('click', ()=>{
+      const data = load();
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'colts-schedule.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    importBtn.addEventListener('click', ()=> importFile.click());
+    importFile.addEventListener('change', (e)=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      const rdr = new FileReader();
+      rdr.onload = function(ev){
+        try{
+          const parsed = JSON.parse(ev.target.result);
+          if(!Array.isArray(parsed)) throw new Error('Imported JSON must be an array of rows');
+          save(parsed);
+          render();
+          alert('Import successful.');
+        }catch(err){
+          alert('Failed to import JSON: ' + err);
+        }
+      };
+      rdr.readAsText(file);
+      importFile.value = '';
+    });
+
+    function escapeHtml(str){
+      if(!str) return '';
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    render();
+
+  })();
+  </script>
+</body>
+</html>

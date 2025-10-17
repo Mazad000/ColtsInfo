@@ -1,0 +1,157 @@
+:root{
+  --colts-blue: #002C5F;      /* primary Colts royal blue */
+  --colts-blue-2: #003A7A;    /* slightly lighter blue for gradients/hover */
+  --colts-white: #FFFFFF;
+  --colts-silver: #A7A9AC;
+  --muted-gray: #F4F6F8;
+  --text-dark: #0B1A2B;
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--text-dark);
+  background: linear-gradient(180deg, #f8fbff 0%, #eaf4ff 100%);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+}
+
+/* Container utilities */
+.container{
+  width: min(1100px, 94%);
+  margin: 0 auto;
+  padding: 1.25rem 0;
+}
+
+/* Header */
+.site-header{
+  background: linear-gradient(90deg, var(--colts-blue), var(--colts-blue-2));
+  color:var(--colts-white);
+  padding: 1rem 0;
+  box-shadow: 0 6px 18px rgba(0,44,95,0.18);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+}
+.brand a.logo{
+  display:inline-block;
+  color:var(--colts-white);
+  text-decoration:none;
+  font-weight:800;
+  letter-spacing:1px;
+  padding:0.35rem 0.6rem;
+  border-radius:6px;
+  background: rgba(255,255,255,0.03);
+}
+
+/* Navigation */
+.main-nav{
+  display:flex;
+  gap:0.75rem;
+  align-items:center;
+}
+.main-nav a{
+  color:var(--colts-white);
+  text-decoration:none;
+  padding:0.5rem 0.75rem;
+  border-radius:6px;
+  font-weight:700;
+  transition:background .18s ease, transform .12s ease;
+}
+.main-nav a:hover{
+  background: rgba(255,255,255,0.07);
+  transform:translateY(-2px);
+}
+
+/* Page headings */
+h1{color:var(--colts-blue); margin-top:1rem}
+.lead{color:#36536d; margin-bottom:1rem}
+
+/* Stadium overview layout */
+.stadium-overview{
+  display:grid;
+  grid-template-columns: 1fr 420px;
+  gap:1rem;
+  align-items:start;
+  margin-top:1rem;
+}
+
+/* Stadium details */
+.stadium-details h2{margin:0 0 0.5rem 0;color:var(--colts-blue)}
+.stadium-details ul{padding-left:1.1rem; margin:0}
+
+/* Stadium photo container */
+.stadium-photo{
+  position:relative;
+  border-radius:10px;
+  overflow:hidden;
+  min-height:260px;
+  background:linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.02));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 8px 22px rgba(9,20,40,0.06);
+  border:1px solid rgba(0,44,95,0.06);
+}
+.stadium-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  vertical-align:middle;
+}
+
+/* Optional translucent overlay for better text contrast */
+.stadium-photo::after{
+  content: "";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(0,44,95,0.06), rgba(0,0,0,0.0));
+  pointer-events:none;
+}
+
+/* Photo credit / caption */
+.photo-credit{
+  position:absolute;
+  right:8px;
+  bottom:8px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size:0.75rem;
+  padding:4px 8px;
+  border-radius:6px;
+  backdrop-filter: blur(4px);
+}
+
+/* Links and buttons */
+.link{
+  color:var(--colts-blue);
+  text-decoration:underline;
+  font-weight:700;
+}
+
+/* Footer */
+.site-footer{
+  margin-top:2rem;
+  background:var(--colts-blue);
+  color:var(--colts-white);
+  padding:1rem 0;
+  text-align:center;
+  border-top-left-radius:8px;
+  border-top-right-radius:8px;
+}
+
+/* Responsive tweaks */
+@media (max-width:900px){
+  .stadium-overview{grid-template-columns: 1fr; grid-auto-rows:auto}
+  .header-inner{flex-direction:column;align-items:flex-start;gap:.75rem}
+  .main-nav{width:100%;justify-content:flex-start;flex-wrap:wrap}
+  .stadium-photo{min-height:200px}
+}
